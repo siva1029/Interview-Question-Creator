@@ -31,7 +31,7 @@ def file_processing(file_path):
         question_gen += page.page_content
         
     splitter_ques_gen = TokenTextSplitter(
-        model_name = 'gpt-3.5-turbo',
+        model_name = 'gpt-4o-mini',
         chunk_size = 10000,
         chunk_overlap = 200
     )
@@ -41,7 +41,7 @@ def file_processing(file_path):
     document_ques_gen = [Document(page_content=t) for t in chunks_ques_gen]
 
     splitter_ans_gen = TokenTextSplitter(
-        model_name = 'gpt-3.5-turbo',
+        model_name = 'gpt-4o-mini',
         chunk_size = 1000,
         chunk_overlap = 100
     )
@@ -62,7 +62,7 @@ def llm_pipeline(file_path):
 
     llm_ques_gen_pipeline = ChatOpenAI(
         temperature = 0.3,
-        model = "gpt-3.5-turbo"
+        model = "gpt-4o-mini"
     )
 
    
@@ -88,7 +88,7 @@ def llm_pipeline(file_path):
 
     vector_store = FAISS.from_documents(document_answer_gen, embeddings)
 
-    llm_answer_gen = ChatOpenAI(temperature=0.1, model="gpt-3.5-turbo")
+    llm_answer_gen = ChatOpenAI(temperature=0.1, model="gpt-4o-mini")
 
     ques_list = ques.split("\n")
     filtered_ques_list = [element for element in ques_list if element.endswith('?') or element.endswith('.')]
